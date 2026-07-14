@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>办公室聊天室 😏</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 登录界面 -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2><i class="fas fa-comments"></i> 加入聊天室</h2>
+            <p class="subtitle">请输入你的昵称（可以是真名或摸鱼代号）</p>
+            <input type="text" id="usernameInput" placeholder="例如：摸鱼小王子、咖啡续命中..." maxlength="20">
+            <button id="joinBtn" onclick="joinChat()">
+                <i class="fas fa-sign-in-alt"></i> 加入聊天
+            </button>
+            <p class="hint">提示：刷新页面不会丢失聊天记录，但会需要重新输入昵称</p>
+            
+            <!-- 管理员面板（默认隐藏） -->
+            <div id="adminPanel" class="admin-panel" style="display: none;">
+                <hr>
+                <h3><i class="fas fa-crown"></i> 管理员面板</h3>
+                <p>你是聊天室管理员，可以清空所有聊天记录</p>
+                <input type="password" id="adminPassword" placeholder="输入管理员密码">
+                <button onclick="clearChat()" class="danger-btn">
+                    <i class="fas fa-trash"></i> 清空所有聊天记录
+                </button>
+                <p id="adminMessage" class="admin-message"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主聊天界面 -->
+    <div id="chatContainer" class="chat-container hidden">
+        <header class="chat-header">
+            <h1><i class="fas fa-coffee"></i> 办公室摸鱼聊天室</h1>
+            <div class="header-info">
+                <span id="onlineCount"><i class="fas fa-user"></i> 在线: 0人</span>
+                <button onclick="showAdminPanel()" id="adminBtn" class="admin-btn hidden">
+                    <i class="fas fa-cog"></i> 管理
+                </button>
+                <button onclick="logout()" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> 退出
+                </button>
+            </div>
+        </header>
+        
+        <div id="chatMessages" class="chat-messages">
+            <!-- 消息会动态加载到这里 -->
+        </div>
+        
+        <div class="chat-input-area">
+            <input type="text" id="messageInput" placeholder="输入摸鱼内容..." maxlength="500">
+            <button onclick="sendMessage()" id="sendBtn">
+                <i class="fas fa-paper-plane"></i> 发送
+            </button>
+        </div>
+        
+        <footer class="chat-footer">
+            <p>💡 提示：分享当前链接给同事即可邀请他们加入 | 聊天记录永久保存</p>
+        </footer>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>
