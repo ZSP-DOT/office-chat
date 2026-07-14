@@ -23,7 +23,7 @@ if (!fs.existsSync(CHAT_FILE)) {
 }
 // 初始化管理员密码（首次运行才生成）
 if (!fs.existsSync(ADMIN_FILE)) {
-  const adminPwd = uuidv4();
+  const adminPwd = '123456';
   fs.writeFileSync(ADMIN_FILE, JSON.stringify({ password: adminPwd }));
   console.log('\n=========================================');
   console.log('首次运行！管理员密码已生成：');
